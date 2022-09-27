@@ -1,4 +1,4 @@
-# Employee-Tracker
+# Employee_Tracker
 
 #### Employee Tracker [TheAnswer07](https://github.com/TheAnswer07)
 
