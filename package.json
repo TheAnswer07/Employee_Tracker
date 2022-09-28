@@ -1,13 +1,12 @@
 {
   "name": "employee_tracker",
   "version": "1.0.0",
-  "description": "#### Employee Tracker [TheAnswer07](https://github.com/TheAnswer07)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
     "url": "git+https://github.com/TheAnswer07/Employee_Tracker.git"
   },
   "keywords": [],
@@ -19,7 +18,8 @@
   "homepage": "https://github.com/TheAnswer07/Employee_Tracker#readme",
   "dependencies": {
     "console.table": "^0.10.0",
-    "inquirer": "^9.1.2",
+    "express": "^4.18.1",
+    "inquirer": "^8.2.1",
     "mysql2": "^2.3.3"
   }
 }
