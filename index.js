@@ -60,36 +60,52 @@ const inquiry = () => {
 }
 
 const viewAllDepartments = () => {
-    db.query('SELECT * FROM departments', (err, departments) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(departments);
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM departments', (err, departments) => {
+            if (err) {
+              reject(err);
+            } else {
+                resolve(departments);
+            }
+        })
     })
-    inquiry();
+    .then((departments) => {
+        console.table(departments);
+        inquiry();
+    })
 }
 
 const viewAllRoles = () => {
-    db.query('SELECT * FROM roles', (err, roles) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(roles);
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM roles', (err, roles) => {
+            if (err) {
+              reject(err);
+            } else {
+                resolve(roles);
+            }
+        })
     })
-    inquiry();
+    .then((roles) => {
+        console.table(roles);
+        inquiry();
+    })
 }
 
 const viewAllEmployees = () => {
-    db.query('SELECT * FROM employees', (err, employees) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(employees);
+    return new Promise((resolve, reject) => {
+        db.query('SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department AS department, roles.salary, CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees manager on manager.id = employees.manager_id', (err, employees) => {
+            if (err) {
+              reject(err);
+            } else {
+                resolve(employees);
+            }
+        })
     })
-    inquiry();
+    .then((employees) => {
+        console.table(employees);
+        inquiry();
+    })
 }
-
-
 
 const addDepartment = () => {
     inquirer.prompt([{
@@ -98,6 +114,10 @@ const addDepartment = () => {
         name: 'name'
     }])
         .then(department => {
+            
+            //Change db.query into promise
+            //inside then block, insert console.log and inquiry
+
             db.query('INSERT INTO departments SET ?', department, err => {
                 if (err) { console.log(err) };
             })
