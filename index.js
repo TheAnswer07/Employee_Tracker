@@ -63,66 +63,72 @@ const viewAllDepartments = () => {
     return new Promise((resolve, reject) => {
         db.query('SELECT * FROM departments', (err, departments) => {
             if (err) {
-              reject(err);
+                reject(err);
             } else {
                 resolve(departments);
             }
         })
     })
-    .then((departments) => {
-        console.table(departments);
-        inquiry();
-    })
+        .then((departments) => {
+            console.table(departments);
+            inquiry();
+        })
 }
 
 const viewAllRoles = () => {
     return new Promise((resolve, reject) => {
         db.query('SELECT * FROM roles', (err, roles) => {
             if (err) {
-              reject(err);
+                reject(err);
             } else {
                 resolve(roles);
             }
         })
     })
-    .then((roles) => {
-        console.table(roles);
-        inquiry();
-    })
+        .then((roles) => {
+            console.table(roles);
+            inquiry();
+        })
 }
 
 const viewAllEmployees = () => {
     return new Promise((resolve, reject) => {
         db.query('SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.department AS department, roles.salary, CONCAT(manager.first_name, " ", manager.last_name) AS manager FROM employees LEFT JOIN roles on employees.role_id = roles.id LEFT JOIN departments on roles.department_id = departments.id LEFT JOIN employees manager on manager.id = employees.manager_id', (err, employees) => {
             if (err) {
-              reject(err);
+                reject(err);
             } else {
                 resolve(employees);
             }
         })
     })
-    .then((employees) => {
-        console.table(employees);
-        inquiry();
-    })
+        .then((employees) => {
+            console.table(employees);
+            inquiry();
+        })
 }
 
 const addDepartment = () => {
     inquirer.prompt([{
         message: 'What Department would you like to add?',
         type: 'input',
-        name: 'name'
+        name: 'department'
     }])
         .then(department => {
-            
+
             //Change db.query into promise
             //inside then block, insert console.log and inquiry
-
-            db.query('INSERT INTO departments SET ?', department, err => {
-                if (err) { console.log(err) };
+            return new Promise((resolve, reject) => {
+                db.query('INSERT INTO departments SET ?', department, err => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(department);
+                    }
+                })
+            }).then((department) => {
+                console.log(`New department ${department.department} added!`);
+                inquiry();
             })
-            console.log('A department has been added!');
-            inquiry();
         })
 }
 
@@ -144,11 +150,16 @@ const addRole = () => {
     }
     ])
         .then(role => {
-            db.query('INSERT INTO roles SET ?', role, err => {
-                if (err) { console.log(err) };
+            new Promise((resolve, reject) => {
+                db.query('INSERT INTO roles SET ?', role, err => {
+                    if (err) reject(err);
+                    resolve(role);
+                })
             })
-            console.log('A Role has been added!');
-            inquiry();
+            .then((role) => {
+                console.log('A Role has been added!');
+                inquiry();
+            })
         })
 }
 
@@ -180,19 +191,26 @@ const addEmployee = () => {
             if (employee.managerYN === 'yes') {
                 console.log('You tried to add a Manager');
                 delete employee.managerYN;
-                db.query('INSERT INTO employees SET ?', employee, err => {
-                    if (err) { console.log(err) };
+                
+                new Promise((resolve, reject) => {
+                    db.query('INSERT INTO employees SET ?', employee, err => {
+                        if (err) reject(err);
+                        resolve(employee);
+                    })
+                }) 
+                .then((employee) => {
+                    console.log(`${employee.first_name} ${employee.last_name} added as a Manager!`);
+                    inquiry();
                 })
-                console.log('A Manager has been added!');
-                inquiry();
+    
             } else if (employee.managerYN === 'no') {
                 console.log('You tried to add an Employee, not a Manager');
                 inquirer.prompt([{
                     message: 'What is the ID of the Manager of the Employee?',
                     type: 'input',
                     name: 'manager_id'
-            }
-    ])
+                }
+                ])
                     .then(employeeNotMgr => {
                         console.log(employee);
                         console.log(employeeNotMgr);
@@ -201,11 +219,16 @@ const addEmployee = () => {
                             ...employee,
                             ...employeeNotMgr
                         }
-                        db.query('INSERT INTO employees SET ?', newEmployee, err => {
-                            if (err) { console.log(err) };
+                        new Promise((resolve, reject) => {
+                            db.query('INSERT INTO employees SET ?', newEmployee, err => {
+                                if (err) reject(err);
+                                resolve(newEmployee);
+                            })
                         })
-                        console.log('An Employee has been added!');
-                        inquiry();
+                        .then((employee) => {
+                            console.log('An Employee has been added!');
+                            inquiry();
+                        })         
                     });
             }
         })
@@ -227,14 +250,17 @@ const updateEmployeeRole = () => {
             let newRole = {
                 role_id: employee.role_id
             }
-            db.query(`UPDATE employees SET ? WHERE id = ${employee.id}`, newRole, err => {
-                if (err) { console.log(err) };
+            new Promise((resolve, reject) => {
+                db.query(`UPDATE employees SET ? WHERE id = ${employee.id}`, newRole, err => {
+                    if (err) reject(err);
+                    resolve(newRole);
+                })
             })
-            console.log('The Employee Role has been updated!');
-            inquiry();
+            .then((role) => {
+                console.log('The Employee Role has been updated!');
+                inquiry();
+            })
         })
 }
-
-
 
 inquiry();
