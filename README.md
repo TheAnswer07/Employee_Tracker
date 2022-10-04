@@ -14,9 +14,8 @@
 * [GitHub App Link](#app-github-link)
 * [Walkthrough video demonstrating App Functionality](#app-video-link)
 * [Screenshots:](#screenshots)
-    1. [Tests run passed](#Tests-run-passed)
-    2. [Employee Tracker generated via VSCode Terminal](#Employee-Tracker-generated-via-VSCode-Terminal)
-    3. [Employee Tracker UI](#Employee-Tracker-UI)
+    1. [Adding a department and viewing all departments](#Adding-a-department-and-viewing-all-departments)
+    2. [Adding an Employee and viewing all Employees](#Adding-an-Employee-and-viewing-all-Employees)
 
 
 
@@ -32,7 +31,7 @@ SO THAT I can organize and plan my business
 
 ### Credits:
 
-N/A
+Big shout out to Scott Nelson from UCB Extension for helping me taylor my code for this project in the best of ways possible.
 
 ### Features:
 
@@ -56,14 +55,10 @@ You can contribute to this project by accessing my GitHub page.
 
 ### Screenshots:
 
-1. Tests run passed:
+1. Adding a department and viewing all departments:
 
-![Tests run passed](screenshots/ "Tests run passed")
+![Adding a department and viewing all departments](screenshots/Adding%20a%20department%20and%20viewing%20all%20departments.png "Adding a department and viewing all departments")
 
-2. Employee Tracker generated via VSCode Terminal:
+2. Adding an Employee and viewing all Employees:
 
-![Employee Tracker generated via VSCode Terminal](screenshots/ "Employee Tracker generated via VSCode Terminal")
-
-3. Employee Tracker UI:
-
-![Employee Tracker UI](screenshots/ "Employee Tracker UI")
+![Adding an Employee and viewing all Employees](screenshots/Adding%20an%20Employee%20and%20viewing%20all%20Employees.png "Adding an Employee and viewing all Employees")
