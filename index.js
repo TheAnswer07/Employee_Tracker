@@ -236,7 +236,7 @@ const addEmployee = () => {
 
 const updateEmployeeRole = () => {
     inquirer.prompt([{
-        message: 'What is the name of the Employee you would like to update?',
+        message: 'What is the ID of the Employee you would like to update?',
         type: 'input',
         name: 'id'
     },

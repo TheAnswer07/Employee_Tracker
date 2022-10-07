@@ -51,7 +51,7 @@ You can contribute to this project by accessing my GitHub page.
 
 ### App Video Link:
 
-[Walkthrough video demonstrating App Functionality](https://)
+[Walkthrough video demonstrating App Functionality](https://drive.google.com/file/d/1eXy8C4c1fEcIE5XSwONJCujHsv-Vc1_N/view)
 
 ### Screenshots:
 
