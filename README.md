@@ -47,7 +47,7 @@ You can contribute to this project by accessing my GitHub page.
 
 ### App GitHub Link:
 
-[GitHub App Link](https://theanswer07.github.io/Employee_Tracker/)
+[GitHub App Link](https://github.com/TheAnswer07/Employee_Tracker)
 
 ### App Video Link:
 
